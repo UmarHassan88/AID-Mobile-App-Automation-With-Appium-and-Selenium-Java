@@ -9,6 +9,9 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Property extends Setup {
 
     @Test(priority = 1)
@@ -37,17 +40,38 @@ public class Property extends Setup {
                                 ".scrollIntoView(new UiSelector().text(\"Target Text\"));"));*/
 
         Thread.sleep(1500);
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("left", 100);     // X start coordinate of swipe area
+        params.put("top", 500);      // Y start coordinate
+        params.put("width", 300);    // Width of swipe area
+        params.put("height", 800);   // Height of swipe area
+        params.put("direction", "up");
+        params.put("percent", 0.8); // How far to swipe (0.0 to 1.0)
+
+        js.executeScript("mobile: swipeGesture", params);
+
+        /*JavascriptExecutor js = (JavascriptExecutor)driver;
+        js.executeScript("mobile: swipeGesture", Map.of(
+                "direction", "up",
+                "percent", 0.5
+                */
         //Click Call
         clickElement(By.xpath("//android.widget.ImageView[@content-desc=\"Call\"]"));
         //Click Wanna Notified
         clickElement(By.xpath("//android.view.View[@content-desc=\"Wanna Notified?\"]"));
 
         //Invoke Login
-        Login instance = new Login();
-        instance.redirectSignUp();
+
 
         SignUp signupinst = new SignUp();
+        signupinst.redirectSignUp();
         signupinst.SignUpMain();
+
+        Login loginInstance = new Login();
+        loginInstance.loginFeatures();
 
 
 
