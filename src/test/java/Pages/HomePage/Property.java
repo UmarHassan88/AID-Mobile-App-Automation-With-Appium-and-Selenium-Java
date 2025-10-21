@@ -16,12 +16,15 @@ public class Property extends Setup {
 
     @Test(priority = 1)
     public void propertySection() throws InterruptedException {
+       System.out.println("Clicked View All...");
         Thread.sleep(1000);
         Assert.assertTrue(driver.findElement(By.xpath("(//android.widget.Button[@content-desc=\"View All\"])[1]")).isDisplayed());
         clickElement(By.xpath("(//android.widget.Button[@content-desc=\"View All\"])[1]"));
         clickElement(By.xpath("//android.widget.ImageView[@content-desc=\"Property\n" +
                 "Explore our carefully curated collection of exceptional properties and unique.\n" +
                 "15 Property\"]"));
+        System.out.println("Clicked the Property Section...");
+
         //Clicking the Listing Property
         clickElement(By.xpath("//android.view.View[@content-desc=\"Consultant\n" +
                 "1/1\n" +
@@ -33,6 +36,8 @@ public class Property extends Setup {
                 "8 Bedrooms\n" +
                 "8 Bathrooms\n" +
                 "10000 Sqft\"]"));
+        System.out.println("Clicked the First Property...");
+
         /*Thread.sleep(2000);
         driver.findElement(
                 MobileBy.AndroidUIAutomator(
@@ -40,6 +45,8 @@ public class Property extends Setup {
                                 ".scrollIntoView(new UiSelector().text(\"Target Text\"));"));*/
 
         Thread.sleep(1500);
+        System.out.println("Scrolling at the Moment...");
+
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -60,13 +67,19 @@ public class Property extends Setup {
                 */
         //Click Call
         clickElement(By.xpath("//android.widget.ImageView[@content-desc=\"Call\"]"));
+        System.out.println("Clicked the Call Icon...");
+
         //Click Wanna Notified
         clickElement(By.xpath("//android.view.View[@content-desc=\"Wanna Notified?\"]"));
+        System.out.println("Clicked Wanna Notified...");
+
 
         //Invoke Login
 
+        System.out.println("This is the Login Page...");
 
         SignUp signupinst = new SignUp();
+
         signupinst.redirectSignUp();
         signupinst.SignUpMain();
 

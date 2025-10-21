@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -13,9 +14,14 @@ import java.awt.event.KeyEvent;
 public class Login extends SignUp{
     By username = By.xpath("//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View[4]/android.view.View/android.widget.EditText[1]");
     By password = By.xpath("//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View[4]/android.view.View/android.widget.EditText[2]");
+    By assertloginText = By.xpath("//android.view.View[@content-desc=\"Hello Again\"]");
 
     public void loginFeatures() throws InterruptedException {
+        System.out.println("Assert if the Login Page is Invoked...");
+
+        Assert.assertTrue(driver.findElement(assertloginText).isDisplayed());
         Thread.sleep(2000);
+        System.out.println("Now logging in with the Registered User...");
         WebElement email = wait.until(ExpectedConditions.visibilityOfElementLocated(username));
         email.click();
         email.sendKeys(containEmail());

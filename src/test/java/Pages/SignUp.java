@@ -30,11 +30,14 @@ public class SignUp extends Setup{
     By signUp = By.xpath("//android.view.View[@content-desc=\"Create Account\"]");
 
     public void redirectSignUp(){
+        System.out.println("Invoking the Sign Up page for Registering the User...");
         WebElement signUpClick = wait.until(ExpectedConditions.elementToBeClickable(signUp));
         signUpClick.click();
     }
 
     public void Assertions() throws InterruptedException {
+        System.out.println("Multiple Assertions in Progress ...");
+
         WebElement nextInv = wait.until(ExpectedConditions.elementToBeClickable(next));
         nextInv.click();
         Thread.sleep(2000);
@@ -42,11 +45,17 @@ public class SignUp extends Setup{
         Assert.assertTrue(driver.findElement(emailAssert).isDisplayed());
     }
 
+    By emailinvalid = By.xpath("//android.view.View[@content-desc=\"Email Invalid\"]");
     public void emailValidations() throws InterruptedException {
         WebElement sendEmail = wait.until(ExpectedConditions.elementToBeClickable(email));
         sendEmail.click();
         sendEmail.sendKeys("umarhassanzia88");
         Thread.sleep(1500);
+        Assert.assertTrue(driver.findElement(emailinvalid).isDisplayed());
+        sendEmail.clear();
+        sendEmail.sendKeys("umarhassanzia88@com");
+        Thread.sleep(1500);
+        Assert.assertTrue(driver.findElement(emailinvalid).isDisplayed());
         sendEmail.clear();
 
         //Initialization for Sign Up Credentials
@@ -82,12 +91,18 @@ public class SignUp extends Setup{
     By loginClick = By.xpath("//android.view.View[@content-desc=\"Login\"]");
     String signUpPassword = "Aqary@88";
     public void signUp2ndPage() throws InterruptedException {
+        System.out.println("Invoking the 2nd Page of Sign Up ...");
+
         Thread.sleep(1500);
         waitElem(firstName).sendKeys("umar");
         waitElem(lastName).sendKeys("hassan");
         waitElem(password).sendKeys("Aqary88");
         Thread.sleep(1500);
         Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[@content-desc=\"Password must be at least 8 characters\"]")).isDisplayed());
+        waitElem(password).clear();
+        Thread.sleep(1500);
+        waitElem(password).sendKeys("Aqary@!#$%()");
+        Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[@content-desc=\"Password must contain at least one number\"]")).isDisplayed());
         waitElem(password).clear();
         waitElem(password).sendKeys(signUpPassword);
         waitElem(confirmPassword).sendKeys("Aqary88");
@@ -100,6 +115,7 @@ public class SignUp extends Setup{
         action.sendKeys(Keys.ENTER);
         Thread.sleep(1500);
         //waitElem(signUp).click();
+
         WebElement logcl = wait.until(ExpectedConditions.elementToBeClickable(loginClick));
         logcl.click();
         System.out.println("Login Clicked!");
